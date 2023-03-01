@@ -11,6 +11,7 @@ const displayEval = document.querySelector("#displayEval");
 const submitInitials = document.querySelector("#submit-initials");
 const highscores = document.querySelectorAll(".highscores");
 const retake = document.querySelector("#retake");
+const totalScore = document.querySelector("#total-score");
 
 // Used for choosing random array items
 const randomIndex = function(max) {
@@ -19,6 +20,8 @@ const randomIndex = function(max) {
 
 let correctAnswer;
 let chosenAnswer;
+
+let score = 0;
 
 // Evaluates if what the user clicked on is correct
 const evaluate = function() {
@@ -29,9 +32,12 @@ const evaluate = function() {
 
     if (chosenAnswer === correctAnswer) {
         displayEval.textContent = "Correct";
+        score += 5;
     } else {
         displayEval.textContent = "Wrong";
     }
+
+    totalScore.textContent = score;
 }
 
 // Question class is used to make all the questions. It accepts a question, four answers, and which answer letter is the solution
@@ -152,6 +158,12 @@ retake.addEventListener("click", function() {
     }
 
     begin.style.display = "unset";
+
+    score = 0;
+    correctAnswer = "";
+    chosenAnswer = "";
+    displayEval.textContent = "";
+
 });
 
 // Clicking begin will remove the begin button and display the first question
