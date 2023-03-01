@@ -1,4 +1,6 @@
 const field = document.querySelector("#field");
+const submitScreen = document.querySelector("#submit-screen");
+const endScreen = document.querySelector("#end-screen");
 const begin = document.querySelector("#begin");
 const q = document.querySelector("#q");
 const a = document.querySelector("#a");
@@ -6,6 +8,9 @@ const b = document.querySelector("#b");
 const c = document.querySelector("#c");
 const d = document.querySelector("#d");
 const displayEval = document.querySelector("#displayEval");
+const submitInitials = document.querySelector("#submit-initials");
+const highscores = document.querySelectorAll(".highscores");
+const retake = document.querySelector("#retake");
 
 // Used for choosing random array items
 const randomIndex = function(max) {
@@ -122,13 +127,36 @@ d.addEventListener("click", function() {
 field.addEventListener("click", function(event) {
     if (event.target.matches("button")) {
         evaluate();
-        changeQuestion(availableQuestions[randomIndex(availableQuestions.length)]);
-        return;
+        if (availableQuestions.length > 0) {
+            changeQuestion(availableQuestions[randomIndex(availableQuestions.length)]);
+            return;
+        } else {
+            field.style.display = "none";
+            submitScreen.style.display = "unset";
+        }
     }
+});
+
+submitInitials.addEventListener("click", function() {
+    submitScreen.style.display = "none";
+    endScreen.style.display = "unset";
+});
+
+retake.addEventListener("click", function() {
+    endScreen.style.display = "none";
+    
+    for (let i = 0; i < answeredList.length; i++) {
+        availableQuestions.push(answeredList[i]);
+        answeredList.splice(i, 1);
+        i--;
+    }
+
+    begin.style.display = "unset";
 });
 
 // Clicking begin will remove the begin button and display the first question
 begin.addEventListener("click", function() {
+    field.style.display = "unset";
     changeQuestion(availableQuestions[randomIndex(availableQuestions.length)]);
     begin.style.display = "none";
 });
