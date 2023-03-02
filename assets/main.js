@@ -12,6 +12,9 @@ const submitInitials = document.querySelector("#submit-initials");
 const highscores = document.querySelectorAll(".highscores");
 const retake = document.querySelector("#retake");
 const totalScore = document.querySelector("#total-score");
+const timerDiv = document.querySelector("#timer-div");
+const timeSpan = document.querySelector("#time-span");
+const labelSpan = document.querySelector("#label-span");
 
 // Used for choosing random array items
 const randomIndex = function(max) {
@@ -23,18 +26,48 @@ let chosenAnswer;
 
 let score = 0;
 
+let time = 90;
+let countdownInterval;
+let updateTimerInterval;
+
+// Clears and resets intervals, hides timer, resets time, removes field display, and sets submit screen to show
+const stopTimer = function() {
+    clearInterval(countdownInterval);
+    clearInterval(updateTimerInterval);
+    countdownInterval = null;
+    updateTimerInterval = null;
+    timerDiv.style.display = "none";
+    time = 90;
+    timeSpan.textContent = time;
+    field.style.display = "none";
+    submitScreen.style.display = "unset";
+}
+
+// Sets timer to be visible, starts timer, updates timer
+const startTimer = function() {
+    timerDiv.style.display = "unset";
+    timeSpan.textContent = time;
+    countdownInterval = setInterval( function() {
+        if (time > 0) {
+            time--;
+        } else {
+            stopTimer();
+        }
+    }, 1000);
+
+    updateTimerInterval = setInterval( function() {
+        timeSpan.textContent = time;
+    }, 100);
+}
+
 // Evaluates if what the user clicked on is correct
 const evaluate = function() {
-
-    // debug
-    // console.log(`correct: ${correctAnswer}`);
-    // console.log(`chosen: ${chosenAnswer}`);
-
     if (chosenAnswer === correctAnswer) {
         displayEval.textContent = "Correct";
         score += 5;
     } else {
         displayEval.textContent = "Wrong";
+        time = time - 10;
     }
 
     totalScore.textContent = score;
@@ -112,63 +145,68 @@ const changeQuestion = function(qNum){
     availableQuestions.splice(index, 1);
 }
 
-// Put these eventlisteners in init function?
+const initEventListeners = function () {
+    // Following four are for the answer buttons
+    a.addEventListener("click", function() {
+        chosenAnswer = "#a";
+    });
+    b.addEventListener("click", function() {
+        chosenAnswer = "#b";
+    });
+    c.addEventListener("click", function() {
+        chosenAnswer = "#c";
+    });
+    d.addEventListener("click", function() {
+        chosenAnswer = "#d";
+    });
 
-// Following four are for the answer buttons
-a.addEventListener("click", function() {
-    chosenAnswer = "#a";
-});
-b.addEventListener("click", function() {
-    chosenAnswer = "#b";
-});
-c.addEventListener("click", function() {
-    chosenAnswer = "#c";
-});
-d.addEventListener("click", function() {
-    chosenAnswer = "#d";
-});
-
-// Clicking on a button will trigger the evaluate function and determine if it's right or wrong.
-// Then it will change to a new question
-field.addEventListener("click", function(event) {
-    if (event.target.matches("button")) {
-        evaluate();
-        if (availableQuestions.length > 0) {
-            changeQuestion(availableQuestions[randomIndex(availableQuestions.length)]);
-            return;
-        } else {
-            field.style.display = "none";
-            submitScreen.style.display = "unset";
+    // Clicking on a button will trigger the evaluate function and determine if it's right or wrong.
+    // Then it will change to a new question
+    field.addEventListener("click", function(event) {
+        if (event.target.matches("button")) {
+            evaluate();
+            if (availableQuestions.length > 0) {
+                changeQuestion(availableQuestions[randomIndex(availableQuestions.length)]);
+                return;
+            } else {
+                field.style.display = "none";
+                submitScreen.style.display = "unset";
+                stopTimer();
+            }
         }
-    }
-});
+    });
 
-submitInitials.addEventListener("click", function() {
-    submitScreen.style.display = "none";
-    endScreen.style.display = "unset";
-});
+    submitInitials.addEventListener("click", function() {
+        submitScreen.style.display = "none";
+        endScreen.style.display = "unset";
+    });
 
-retake.addEventListener("click", function() {
-    endScreen.style.display = "none";
-    
-    for (let i = 0; i < answeredList.length; i++) {
-        availableQuestions.push(answeredList[i]);
-        answeredList.splice(i, 1);
-        i--;
-    }
+    retake.addEventListener("click", function() {
+        endScreen.style.display = "none";
+        
+        for (let i = 0; i < answeredList.length; i++) {
+            availableQuestions.push(answeredList[i]);
+            answeredList.splice(i, 1);
+            i--;
+        }
 
-    begin.style.display = "unset";
+        begin.style.display = "unset";
 
-    score = 0;
-    correctAnswer = "";
-    chosenAnswer = "";
-    displayEval.textContent = "";
+        score = 0;
+        correctAnswer = "";
+        chosenAnswer = "";
+        displayEval.textContent = "";
 
-});
+    });
 
-// Clicking begin will remove the begin button and display the first question
-begin.addEventListener("click", function() {
-    field.style.display = "unset";
-    changeQuestion(availableQuestions[randomIndex(availableQuestions.length)]);
-    begin.style.display = "none";
-});
+    // Clicking begin will remove the begin button and display the first question
+    begin.addEventListener("click", function() {
+        field.style.display = "unset";
+        changeQuestion(availableQuestions[randomIndex(availableQuestions.length)]);
+        begin.style.display = "none";
+
+        startTimer();
+    });
+}
+
+initEventListeners();
