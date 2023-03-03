@@ -7,7 +7,7 @@ const a = document.querySelector("#a");
 const b = document.querySelector("#b");
 const c = document.querySelector("#c");
 const d = document.querySelector("#d");
-const displayEval = document.querySelector("#displayEval");
+const displayEval = document.querySelector("#display-eval");
 const submitInitials = document.querySelector("#submit-initials");
 const highscores = document.querySelectorAll(".highscores");
 const retake = document.querySelector("#retake");
@@ -15,6 +15,7 @@ const totalScore = document.querySelector("#total-score");
 const timerDiv = document.querySelector("#timer-div");
 const timeSpan = document.querySelector("#time-span");
 const labelSpan = document.querySelector("#label-span");
+const minusDisplay = document.querySelector("#minus-display");
 
 // Used for choosing random array items
 const randomIndex = function(max) {
@@ -52,6 +53,19 @@ const startTimer = function() {
             time--;
         } else {
             stopTimer();
+            let evalDelay = 3;
+
+            displayEval.textContent = "Time ran out, quiz over";
+
+            displayEval.style.display = "unset";
+
+            const showDisplayEval = setInterval(function() {
+                evalDelay--
+                if (evalDelay === 0) {
+                    clearInterval(showDisplayEval);
+                    displayEval.style.display = "none";
+                }
+            }, 1000);
         }
     }, 1000);
 
@@ -62,15 +76,40 @@ const startTimer = function() {
 
 // Evaluates if what the user clicked on is correct
 const evaluate = function() {
+    let minusDelay = 3;
+    let evalDelay = 3;
+
     if (chosenAnswer === correctAnswer) {
         displayEval.textContent = "Correct";
         score += 5;
     } else {
         displayEval.textContent = "Wrong";
         time = time - 10;
+
+        // Displays "-10" next to timer for three seconds
+        minusDisplay.style.display = "unset";
+
+        const minusDisplayInterval = setInterval(function() {
+            minusDelay--
+            if (minusDelay === 0) {
+                clearInterval(minusDisplayInterval);
+                minusDisplay.style.display = "none";
+            }
+        }, 1000);
     }
 
     totalScore.textContent = score;
+
+    // Displays whether answer was correct or wrong for three seconds
+    displayEval.style.display = "unset";
+
+    const showDisplayEval = setInterval(function() {
+        evalDelay--
+        if (evalDelay === 0) {
+            clearInterval(showDisplayEval);
+            displayEval.style.display = "none";
+        }
+    }, 1000);
 }
 
 // Question class is used to make all the questions. It accepts a question, four answers, and which answer letter is the solution

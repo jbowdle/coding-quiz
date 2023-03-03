@@ -1,6 +1,8 @@
 #submit-screen,
 #end-screen,
 #field,
-#timer-div {
+#timer-div,
+#display-eval,
+#minus-display {
     display: none;
 }
