@@ -16,6 +16,8 @@ const timerDiv = document.querySelector("#timer-div");
 const timeSpan = document.querySelector("#time-span");
 const labelSpan = document.querySelector("#label-span");
 const minusDisplay = document.querySelector("#minus-display");
+const initials = document.querySelector("#initials");
+const initialDisplay = document.querySelector("#initial-display");
 
 // Used for choosing random array items
 const randomIndex = function(max) {
@@ -215,9 +217,24 @@ const initEventListeners = function () {
         }
     });
 
+    // Validates user input for initials. If initials are taken, the user is moved to the end screen.
     submitInitials.addEventListener("click", function() {
-        submitScreen.style.display = "none";
-        endScreen.style.display = "unset";
+        let finishedInitials = initials.value;
+
+        if (finishedInitials.length > 2) {
+            window.alert("Please enter only two characters");
+        // The following uses a regex (regular expression) and assertions to confirm that only alphabetic characters were used.
+        // References for regex: 
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Assertions
+        // https://stackoverflow.com/questions/23476532/check-if-string-contains-only-letters-in-javascript
+        } else if (!/^[a-zA-Z]+$/.test(finishedInitials)) {
+            window.alert("Please enter only alphabetic characters");
+        } else {
+            initialDisplay.textContent = finishedInitials;
+            submitScreen.style.display = "none";
+            endScreen.style.display = "unset";
+        }
     });
 
     retake.addEventListener("click", function() {
