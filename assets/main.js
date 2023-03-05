@@ -176,6 +176,8 @@ const qFive = new Question("Example Question 5",
     "bad answer D",
     "#a");
 
+// As questions are answered, they will be moved to answeredList
+// This is used to determine which questions are still available
 let availableQuestions = [qOne, qTwo, qThree, qFour, qFive];
 let answeredList = [];
 
@@ -188,6 +190,7 @@ const changeQuestion = function(qNum){
     availableQuestions.splice(index, 1);
 }
 
+// Adds score to local storage
 const storeScore = function() {
     submittedScores.push(`${initials.value}${score}`);
     localStorage.setItem("storedScores", JSON.stringify(submittedScores));
@@ -245,6 +248,7 @@ const init = function() {
         }
     });
 
+    // Resets question lists, score, and content of HTML elements. Removes end screen and makes begin button visible. Quiz can now be taken again.
     retake.addEventListener("click", function() {
         endScreen.style.display = "none";
         
@@ -260,7 +264,6 @@ const init = function() {
         correctAnswer = "";
         chosenAnswer = "";
         displayEval.textContent = "";
-
     });
 
     // Clicking begin will remove the begin button and display the first question
@@ -272,6 +275,7 @@ const init = function() {
         startTimer();
     });
 
+    // Add links to highscore page
     for (const link of highscoreLink) {
         link.addEventListener("click", function() {
             window.location.href = "./highscores.html";
@@ -280,6 +284,7 @@ const init = function() {
 
     let storedScores = JSON.parse(localStorage.getItem("storedScores"));
 
+    // Adds stored scores to the local array
     if (storedScores !== null) {
         submittedScores = storedScores;
     }
