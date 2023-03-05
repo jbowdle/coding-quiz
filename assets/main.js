@@ -141,39 +141,39 @@ class Question {
     }
 }
 
-const qOne = new Question("Example Question 1",
-    "bad answer A",
-    "correct answer B",
-    "bad answer C",
-    "bad answer D",
+const qOne = new Question("Arrays must be wrapped in:",
+    "parentheses ()",
+    "brackets []",
+    "curly brackets {}",
+    "question marks ??",
     "#b");
 
-const qTwo = new Question("Example Question 2",
-    "bad answer A",
-    "bad answer B",
-    "bad answer C",
-    "correct answer D",
+const qTwo = new Question("Syntax for a function expression is:",
+    "function functionName() {}",
+    "make functionName() =",
+    "new function = ",
+    "const functionName = function() {}",
     "#d");
 
-const qThree = new Question("Example Question 3",
-    "bad answer A",
-    "correct answer B",
-    "bad answer C",
-    "bad answer D",
+const qThree = new Question("Which method can be used to create a timer?",
+    "makeTimer()",
+    "setInterval()",
+    "setTime()",
+    "setDelay()",
     "#b");
 
-const qFour = new Question("Example Question 4",
-    "bad answer A",
-    "bad answer B",
-    "correct answer C",
-    "bad answer D",
+const qFour = new Question("A template literal is wrapped in:",
+    "exclamation marks !!",
+    "quotes ''",
+    "backticks ``",
+    "nothing",
     "#c");
 
-const qFive = new Question("Example Question 5",
-    "correct answer A",
-    "bad answer B",
-    "bad answer C",
-    "bad answer D",
+const qFive = new Question("A key-____ pair consists of a key and its associated:",
+    "value",
+    "buddy",
+    "lock",
+    "data",
     "#a");
 
 // As questions are answered, they will be moved to answeredList
