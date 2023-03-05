@@ -9,7 +9,7 @@ const c = document.querySelector("#c");
 const d = document.querySelector("#d");
 const displayEval = document.querySelector("#display-eval");
 const submitInitials = document.querySelector("#submit-initials");
-const highscores = document.querySelectorAll(".highscores");
+const highscoreLink = document.querySelectorAll(".highscore-link");
 const retake = document.querySelector("#retake");
 const totalScore = document.querySelector("#total-score");
 const timerDiv = document.querySelector("#timer-div");
@@ -186,7 +186,7 @@ const changeQuestion = function(qNum){
     availableQuestions.splice(index, 1);
 }
 
-const initEventListeners = function () {
+const initEventListeners = function() {
     // Following four are for the answer buttons
     a.addEventListener("click", function() {
         chosenAnswer = "#a";
@@ -263,6 +263,12 @@ const initEventListeners = function () {
 
         startTimer();
     });
+
+    for (const link of highscoreLink) {
+        link.addEventListener("click", function() {
+            window.location.href = "./highscores.html";
+        });
+    }
 }
 
 initEventListeners();
