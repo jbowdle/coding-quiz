@@ -29,6 +29,8 @@ let chosenAnswer;
 
 let score = 0;
 
+let submittedScores = [];
+
 let time = 90;
 let countdownInterval;
 let updateTimerInterval;
@@ -186,7 +188,12 @@ const changeQuestion = function(qNum){
     availableQuestions.splice(index, 1);
 }
 
-const initEventListeners = function() {
+const storeScore = function() {
+    submittedScores.push(`${initials.value}${score}`);
+    localStorage.setItem("storedScores", JSON.stringify(submittedScores));
+}
+
+const init = function() {
     // Following four are for the answer buttons
     a.addEventListener("click", function() {
         chosenAnswer = "#a";
@@ -234,6 +241,7 @@ const initEventListeners = function() {
             initialDisplay.textContent = finishedInitials;
             submitScreen.style.display = "none";
             endScreen.style.display = "unset";
+            storeScore();
         }
     });
 
@@ -269,6 +277,12 @@ const initEventListeners = function() {
             window.location.href = "./highscores.html";
         });
     }
+
+    let storedScores = JSON.parse(localStorage.getItem("storedScores"));
+
+    if (storedScores !== null) {
+        submittedScores = storedScores;
+    }
 }
 
-initEventListeners();
+init();
