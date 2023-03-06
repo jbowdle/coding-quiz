@@ -10,36 +10,44 @@
     </head>
     <body>
         <header>
-            <button class="highscore-link">Highscores</button>
-            <div id="timer-div">
-                <p><span id="time-span"></span> <span id="label-span">seconds</span></p>
-                <p id="minus-display">-10</p>
+            <div id="header-container">
+                <button class="highscore-link">Highscores</button>
+                <div id="timer-div">
+                    <p><span id="time-span"></span> <span id="label-span">seconds</span></p>
+                    <p id="minus-display">-10</p>
+                </div>
             </div>
         </header>
         <main>
-            <h1>JavaScript Coding Quiz</h1>
-            <button id="begin">Begin</button>
-            <div id="field">
-                <p id="q"></p>
-                <button id="a" class="answer"></button>
-                <button id="b" class="answer"></button>
-                <button id="c" class="answer"></button>
-                <button id="d" class="answer"></button>
+            <div id="main-container">
+                <h1>JavaScript Coding Quiz</h1>
+                <button id="begin">Begin</button>
+                <div id="field">
+                    <p id="q"></p>
+                    <button id="a" class="answer"></button>
+                    <button id="b" class="answer"></button>
+                    <button id="c" class="answer"></button>
+                    <button id="d" class="answer"></button>
+                </div>
+                <div id="submit-screen">
+                    <label for="initials">Input initials: </label>
+                    <input type="text" id="initials" name="initials">
+                    <input type="submit" id="submit-initials">
+                </div>
+                <div id="end-screen">
+                    <div id="score-container">
+                        <h2>Initials</h2>
+                        <h2>Score</h2>
+                        <p id="initial-display"></p>
+                        <p id="total-score">0</p>
+                    </div>
+                    <div id="button-container">
+                        <button class="highscore-link">Go to Highscores</button>
+                        <button id="retake">Retake Quiz</button>
+                    </div>
+                </div>
+                <p id="display-eval"></p>
             </div>
-            <div id="submit-screen">
-                <label for="initials">Input initials: </label>
-                <input type="text" id="initials" name="initials">
-                <input type="submit" id="submit-initials">
-            </div>
-            <div id="end-screen">
-                <h2>Initials</h2>
-                <h2>Score</h2>
-                <p id="initial-display"></p>
-                <p id="total-score">0</p>
-                <button class="highscore-link">Go to Highscores</button>
-                <button id="retake">Retake Quiz</button>
-            </div>
-            <p id="display-eval"></p>
         </main>
 
         <script src="./assets/main.js"></script>

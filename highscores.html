@@ -10,21 +10,25 @@
     </head>
     <body>
         <header>
-            <button id="quiz-link">Coding Quiz</button>
+            <div id="header-container">
+                <button id="quiz-link">Coding Quiz</button>
+                <button id="reset-button">Reset Highscores</button>
+            </div>
         </header>
         <main>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Initials</th>
-                        <th>Scores</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div id="highscore-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Initials</th>
+                            <th>Scores</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                </tbody>
-            </table>
-            <button id="reset-button">Reset Highscores</button>
+                    </tbody>
+                </table>   
+            </div>
         </main>
 
         <script src="./assets/highscore.js"></script>

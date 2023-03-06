@@ -45,7 +45,7 @@ const stopTimer = function() {
     time = 90;
     timeSpan.textContent = time;
     field.style.display = "none";
-    submitScreen.style.display = "unset";
+    submitScreen.style.display = "flex";
 }
 
 // Sets timer to be visible, starts timer, updates timer
@@ -142,38 +142,38 @@ class Question {
 }
 
 const qOne = new Question("Arrays must be wrapped in:",
-    "parentheses ()",
-    "brackets []",
-    "curly brackets {}",
-    "question marks ??",
+    "a. parentheses ()",
+    "b. brackets []",
+    "c. curly brackets {}",
+    "d. question marks ??",
     "#b");
 
 const qTwo = new Question("Syntax for a function expression is:",
-    "function functionName() {}",
-    "make functionName() =",
-    "new function = ",
-    "const functionName = function() {}",
+    "a. function functionName() {}",
+    "b. make functionName() =",
+    "c. new function = ",
+    "d. const functionName = function() {}",
     "#d");
 
 const qThree = new Question("Which method can be used to create a timer?",
-    "makeTimer()",
-    "setInterval()",
-    "setTime()",
-    "setDelay()",
+    "a. makeTimer()",
+    "b. setInterval()",
+    "c. setTime()",
+    "d. setDelay()",
     "#b");
 
 const qFour = new Question("A template literal is wrapped in:",
-    "exclamation marks !!",
-    "quotes ''",
-    "backticks ``",
-    "nothing",
+    "a. exclamation marks !!",
+    "b. quotes ''",
+    "c. backticks ``",
+    "d. nothing",
     "#c");
 
 const qFive = new Question("A key-____ pair consists of a key and its associated:",
-    "value",
-    "buddy",
-    "lock",
-    "data",
+    "a. value",
+    "b. buddy",
+    "c. lock",
+    "d. data",
     "#a");
 
 // As questions are answered, they will be moved to answeredList
@@ -221,7 +221,7 @@ const init = function() {
                 return;
             } else {
                 field.style.display = "none";
-                submitScreen.style.display = "unset";
+                submitScreen.style.display = "flex";
                 stopTimer();
             }
         }
@@ -243,7 +243,7 @@ const init = function() {
         } else {
             initialDisplay.textContent = finishedInitials;
             submitScreen.style.display = "none";
-            endScreen.style.display = "unset";
+            endScreen.style.display = "grid";
             storeScore();
         }
     });
@@ -268,7 +268,7 @@ const init = function() {
 
     // Clicking begin will remove the begin button and display the first question
     begin.addEventListener("click", function() {
-        field.style.display = "unset";
+        field.style.display = "grid";
         changeQuestion(availableQuestions[randomIndex(availableQuestions.length)]);
         begin.style.display = "none";
 

@@ -6,3 +6,145 @@
 #minus-display {
     display: none;
 }
+
+:root {
+    --bg: rgb(255, 255, 255);
+    --header-container: rgb(101, 135, 140);
+    --main-container: rgb(255, 255, 255);
+    --field: rgb(255, 255, 255); 
+    --button: rgb(13, 68, 53);
+    --button-text: rgb(255, 255, 255);
+    --button-hover: rgb(0, 122, 88);;
+    --button-hover-text: rgb(255, 255, 255);
+    --button-border: rgb(0, 0, 0);
+    --time-text: rgb(255, 255, 255); 
+    --minus-display: rgb(255, 148, 148); 
+    --display-eval: rgb(75, 75, 75);
+}
+
+body {
+    background-color: var(--bg);
+    font-family:'Times New Roman', Times, serif;
+    font-size: 18px;
+}
+
+h1 {
+    font-size: 200%;
+    padding: 20px;
+}
+
+h2, 
+th {
+    font-size: 110%;
+    font-weight: bold;
+}
+
+header {
+    width: 100vw;
+    height: 50px;
+    background-color: var(--header-container);
+    display: flex;
+    align-items: center;
+}
+
+/* Buttons, excluding answers buttons in the quiz */
+button, 
+input[type="submit"] {
+    background-color: var(--button);
+    color: var(--button-text);
+    border: 1px solid var(--button-border);
+    border-radius: 5px;
+    margin: 1px;
+    padding: 5px;
+    font-size: 105%;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: var(--button-hover); 
+    color: var(--button-hover-text);
+}
+
+#highscore-container {
+    max-width: 50vw;
+    padding-top: 30px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+th {
+    padding: 5px 10px 0px 0px;
+}
+
+td {
+    border-bottom: 0.5px solid var(--display-eval);
+}
+
+#header-container {
+    width: 75vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#main-container {
+    background-color: var(--main-container);
+    max-width: 80vw;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#main-container,
+#timer-div {
+    position: relative;
+}
+
+#minus-display,
+#display-eval {
+    position: absolute;
+}
+
+#minus-display {
+    color: var(--minus-display);
+}
+
+#display-eval {
+    color: var(--display-eval);
+}
+
+#time-span,
+#label-span {
+    color: var(--time-text);
+}
+
+#field {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: var(--field);
+    /* main.js sets display to grid */
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    justify-items: start;
+}
+
+#submit-screen {
+    /* main.js sets display to flex */
+    background-color: var(--field);
+    justify-content: center;
+}
+
+#end-screen {
+    /* main.js sets display to grid */
+    background-color: var(--field);
+}
+
+#score-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+#button-container {
+    display: inline;
+}
